@@ -7,4 +7,13 @@ const userRepository = AppDataSource.getRepository(User);
 const getUsers = (): Promise<IUser[]> => {
     return userRepository.find();
 }
-export default {getUsers};
+
+
+const postUser = async (userData: IUser): Promise<IUser> => {
+    const newUser = userRepository.create(userData);
+    await userRepository.save(newUser);
+    return newUser;
+}
+
+
+export default {getUsers, postUser};
